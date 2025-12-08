@@ -1,0 +1,146 @@
+# swagger.yml
+# API documentation for TrailService matching CW2 database schema
+
+openapi: 3.0.0
+info:
+  title: "TrailService REST API"
+  description: "API for managing trail information with authentication"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Trail:
+      type: "object"
+      required:
+        - Trail_Name
+        - Owner_ID
+      properties:
+        Trail_Name:
+          type: "string"
+        Trail_Summary:
+          type: "string"
+        Difficulty:
+          type: "string"
+        Location:
+          type: "string"
+        Length:
+          type: "number"
+        Elevation_Gain:
+          type: "integer"
+        Start_Point:
+          type: "string"
+        End_Point:
+          type: "string"
+        Estimated_Time:
+          type: "number"
+        Accessibility:
+          type: "string"
+        Surface_Type:
+          type: "string"
+        Owner_ID:
+          type: "integer"
+        email:
+          type: "string"
+          description: "Email for authentication (required for create/update/delete)"
+        password:
+          type: "string"
+          description: "Password for authentication (required for create/update/delete)"
+  
+  parameters:
+    trail_id:
+      name: "trail_id"
+      description: "ID of the trail"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
+paths:
+  /trails:
+    get:
+      operationId: "trails.read_all"
+      tags:
+        - "Trails"
+      summary: "Retrieve all trails"
+      description: "Public endpoint returning all trail records"
+      responses:
+        "200":
+          description: "Successfully retrieved trails list"
+    
+    post:
+      operationId: "trails.create"
+      tags:
+        - "Trails"
+      summary: "Create new trail"
+      description: "Requires authentication via university service"
+      requestBody:
+        description: "Trail data with authentication credentials"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "trail"
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "201":
+          description: "Trail created successfully"
+        "401":
+          description: "Authentication failed"
+        "406":
+          description: "Trail name already exists"
+  
+  /trails/{trail_id}:
+    get:
+      operationId: "trails.read_one"
+      tags:
+        - "Trails"
+      summary: "Retrieve single trail by ID"
+      description: "Public endpoint for accessing individual trail details"
+      parameters:
+        - $ref: "#/components/parameters/trail_id"
+      responses:
+        "200":
+          description: "Successfully retrieved trail"
+        "404":
+          description: "Trail not found"
+    
+    put:
+      operationId: "trails.update"
+      tags:
+        - "Trails"
+      summary: "Update existing trail"
+      description: "Requires authentication to modify trail data"
+      parameters:
+        - $ref: "#/components/parameters/trail_id"
+      requestBody:
+        description: "Updated trail data with authentication"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "trail"
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "200":
+          description: "Trail updated successfully"
+        "401":
+          description: "Authentication failed"
+        "404":
+          description: "Trail not found"
+    
+    delete:
+      operationId: "trails.delete"
+      tags:
+        - "Trails"
+      summary: "Delete trail"
+      description: "Requires authentication to remove trail from database"
+      parameters:
+        - $ref: "#/components/parameters/trail_id"
+      responses:
+        "200":
+          description: "Trail deleted successfully"
+        "404":
+          description: "Trail not found"
