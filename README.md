@@ -1,6 +1,6 @@
 # TrailService REST API
 
-Trail Management RESTful API - MAL2017 Assessment 2
+Trail Management RESTful API - MAL2018 Assessment 2
 
 ## Project Overview
 
@@ -100,7 +100,7 @@ The API is deployed on the university server at:
 
 **Student Name:** Varshini
 **Student ID:** BSSE2506011
-**Module:** MAL2017 Information Management & Retrieval
+**Module:** MAL2018 Information Management & Retrieval
 **Assessment:** CW2 - REST API Development
 
 ## GitHub Repository
