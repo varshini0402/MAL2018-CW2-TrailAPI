@@ -27,8 +27,7 @@ The API uses the CW2 schema on dist-6-505.uopnet.plymouth.ac.uk with the followi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/varshini0402/MAL2017-CW2-TrailAPI.git
-cd MAL2017-CW2-TrailAPI
+git clone  https://github.com/varshini0402/MAL2018-CW2-TrailAPI
 ```
 
 2. Install required packages:
