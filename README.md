@@ -67,7 +67,7 @@ Authentication is performed through the university service at:
 
 ## Project Structure
 ```
-MAL2017_TrailService/
+MAL2018_TrailService/
 ├── app.py                 # Main application entry point
 ├── config.py              # Database configuration
 ├── models.py              # SQLAlchemy models and schemas
